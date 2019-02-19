@@ -25,6 +25,8 @@ group :development, :test do
   gem 'capybara'
   gem 'webdrivers'
   gem 'selenium-webdriver'
+  gem 'guard'
+  gem 'guard-rspec'
 end
 
 group :development do
