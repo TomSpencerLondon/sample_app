@@ -22,6 +22,9 @@ group :development, :test do
   gem 'sqlite3', '~> 1.3.6'
   gem 'byebug'
   gem 'rspec-rails', '~> 3.5'
+  gem 'capybara'
+  gem 'webdrivers'
+  gem 'selenium-webdriver'
 end
 
 group :development do
