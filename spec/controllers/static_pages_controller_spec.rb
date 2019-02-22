@@ -26,4 +26,12 @@ RSpec.describe StaticPagesController, type: :request do
       assert_select "title", "About | Ruby on Rails Tutorial Sample App"
     end
   end
+
+  describe "GET #contact" do
+    it "returns contact page" do
+      get static_pages_contact_url
+      expect(response).to have_http_status(:success)
+      assert_select "title", "Contact | Ruby on Rails Tutorial Sample App"
+    end
+  end
 end
