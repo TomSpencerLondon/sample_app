@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.feature "StaticPages", type: :feature do
 
-  before(:each) do
-    Capybara.app_host = 'https://shrouded-ravine-12833.herokuapp.com'
-  end
+  # before(:each) do
+  #   Capybara.app_host = 'https://shrouded-ravine-12833.herokuapp.com'
+  # end
 
   scenario 'visiting the home page' do
     visit root_path
@@ -35,5 +35,11 @@ RSpec.feature "StaticPages", type: :feature do
     visit root_path
     find('a[href="/contact"]').click
     expect(page).to have_content 'Contact'
+  end
+
+  scenario 'clicking sign up in the footer' do
+    visit root_path
+    find('a[href="/signup"]').click
+    expect(page).to have_content 'Sign up'
   end
 end
