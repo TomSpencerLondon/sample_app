@@ -13,7 +13,7 @@ RSpec.describe StaticPagesController, type: :request do
 
   describe "GET #help" do
     it "returns help page" do
-      get static_pages_help_url
+      get help_url
       expect(response).to have_http_status(:success)
       assert_select "title", "Help | Ruby on Rails Tutorial Sample App"
     end
@@ -21,7 +21,7 @@ RSpec.describe StaticPagesController, type: :request do
 
   describe "GET #about" do
     it "returns about page" do
-      get static_pages_about_url
+      get about_url
       expect(response).to have_http_status(:success)
       assert_select "title", "About | Ruby on Rails Tutorial Sample App"
     end
@@ -29,7 +29,7 @@ RSpec.describe StaticPagesController, type: :request do
 
   describe "GET #contact" do
     it "returns contact page" do
-      get static_pages_contact_url
+      get contact_url
       expect(response).to have_http_status(:success)
       assert_select "title", "Contact | Ruby on Rails Tutorial Sample App"
     end
