@@ -2,10 +2,6 @@ require 'rails_helper'
 
 RSpec.feature "UserSignup", type: :feature do
 
-  before(:each) do
-    Capybara.app_host = 'https://www.tomsampleapp.com'
-  end
-
   scenario 'visit signup' do
     visit signup_path
     expect(current_path).to eq("/signup")
