@@ -28,6 +28,7 @@ RSpec.feature "UserSignup", type: :feature do
     fill_in 'user[password]', with: 'Password'
     fill_in 'user[password_confirmation]', with: 'Password'
     find('input[name="commit"]').click
+    require 'pry' ; binding.pry
     expect(User.count).to eq(new_count)
   end
 end
