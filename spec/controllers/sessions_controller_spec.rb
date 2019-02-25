@@ -25,7 +25,7 @@ RSpec.describe SessionsController, type: :controller do
     end
 
     context 'login with valid information followed by logout' do
-      it "user login succeeds" do
+      it "user login and logout succeed" do
         User.create(name: "Tom Spencer",
                     email: "tom@spencer.com",
                     password: "Testing",

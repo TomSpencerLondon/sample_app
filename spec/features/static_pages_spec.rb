@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.feature "StaticPages", type: :feature do
 
-  before(:each) do
-    Capybara.app_host = 'https://www.tomsampleapp.com'
-  end
+  # before(:each) do
+  #   Capybara.app_host = 'https://www.tomsampleapp.com'
+  # end
 
   scenario 'visiting the home page' do
     visit root_path

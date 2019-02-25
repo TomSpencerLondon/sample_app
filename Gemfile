@@ -8,7 +8,6 @@ gem 'mini_magick'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'bootstrap-sass'
-gem 'puma'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
@@ -27,6 +26,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'guard'
   gem 'guard-rspec'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -38,6 +38,7 @@ end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'database_cleaner'
 end
 
 group :production do
