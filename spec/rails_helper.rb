@@ -71,4 +71,8 @@ RSpec.configure do |config|
 
 end
 
-Capybara.default_driver = :selenium_chrome_headless
+# Capybara.default_driver = :selenium_chrome_headless
+
+Capybara.run_server = true 
+Capybara.server_port = 7000
+Capybara.app_host = "http://localhost:#{Capybara.server_port}"
