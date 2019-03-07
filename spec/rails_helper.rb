@@ -8,6 +8,8 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'support/password_helper'
 require 'support/factory_bot'
+require 'support/test_helper'
+
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -64,6 +66,8 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.render_views
   config.include TestPasswordHelper
+  config.include TestHelper
+  config.include SessionsHelper
 
 end
 

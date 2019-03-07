@@ -38,6 +38,60 @@ RSpec.describe SessionsController, type: :controller do
         expect(session[:user_id].nil?).to be(true)
       end
     end
+
+    context 'login with remembering' do
+      it "user login and logout succeed" do
+        user = User.create(name: "Tom Spencer",
+                    email: "tom@spencer.com",
+                    password: "Testing",
+                    password_confirmation: "Testing"
+                   )
+        post :create, params: { session: { email: "tom@spencer.com",
+                                              password: "Testing",
+                                              remember_me: '1' } }
+        expect(cookies['remember_token'].present?).to be(true)
+      end
+    end
+
+    context 'login without remembering' do
+      it "user login and logout succeed" do
+        user = User.create(name: "Tom Spencer",
+                    email: "tom@spencer.com",
+                    password: "Testing",
+                    password_confirmation: "Testing"
+                   )
+        post :create, params: { session: { email: "tom@spencer.com",
+                                              password: "Testing",
+                                              remember_me: '0' } }
+        expect(cookies['remember_token'].present?).to be(false)
+      end
+    end
+  end
+
+  describe "SessionHelper" do
+    before do
+      @user = User.create(name: "Michael Spencer",
+                          email: "michael@example.com",
+                          password_digest: User.digest('password'))
+      remember(@user)
+    end
+    context 'current_user' do
+      
+      it 'remembers the user returns right user when session is nil' do
+        expect(@user).to eq(current_user)
+        expect(is_logged_in?).to eq(true)
+      end
+    end
+
+    context 'current_user' do
+      before do
+        @user.update_attribute(:remember_digest, User.digest(User.new_token))
+      end
+      
+      it 'returns nil when the remember digest is wrong' do
+        expect(current_user).to eq(nil)
+      end
+    end
   end
 
 end

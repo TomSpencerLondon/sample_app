@@ -135,5 +135,16 @@ RSpec.describe User, type: :model do
         expect(@user.valid?).to be(false)
       end
     end
+
+    context 'authenticated? returns false for a user with nil digest' do
+      before do
+        password = "password"
+        @user = User.new(name: "Example User", email: "user@example.com",
+          password: password, password_confirmation: password)
+      end
+      it 'returns false' do
+        expect(@user.authenticated?('')).to be(false)
+      end
+    end
   end
 end
