@@ -143,7 +143,7 @@ RSpec.describe User, type: :model do
           password: password, password_confirmation: password)
       end
       it 'returns false' do
-        expect(@user.authenticated?('')).to be(false)
+        expect(@user.authenticated?(:remember, '')).to be(false)
       end
     end
   end

@@ -12,11 +12,12 @@ RSpec.describe SessionsController, type: :controller do
 
     context 'login with valid information' do
       it "user login succeeds" do
-        User.create(name: "Tom Spencer",
-                    email: "tom@spencer.com",
-                    password: "Testing",
-                    password_confirmation: "Testing"
-                   )
+        FactoryBot.create(:user, 
+                          name: "Tom Spencer",
+                          email: "tom@spencer.com",
+                          password: "Testing",
+                          password_confirmation: "Testing"
+                         )
         post :create, params: { session: { email: "tom@spencer.com", password: "Testing" } }
         expect(flash.empty?).to eq(true)
         expect(session.empty?).to be(false)
@@ -26,11 +27,12 @@ RSpec.describe SessionsController, type: :controller do
 
     context 'login with valid information followed by logout' do
       it "user login and logout succeed" do
-        User.create(name: "Tom Spencer",
-                    email: "tom@spencer.com",
-                    password: "Testing",
-                    password_confirmation: "Testing"
-                   )
+        FactoryBot.create(:user,
+                          name: "Tom Spencer",
+                          email: "tom@spencer.com",
+                          password: "Testing",
+                          password_confirmation: "Testing"
+                         )
         post :create, params: { session: { email: "tom@spencer.com", password: "Testing" } }
         expect(flash.empty?).to eq(true)
         delete :destroy
@@ -41,11 +43,12 @@ RSpec.describe SessionsController, type: :controller do
 
     context 'login with remembering' do
       it "user login and logout succeed" do
-        user = User.create(name: "Tom Spencer",
-                    email: "tom@spencer.com",
-                    password: "Testing",
-                    password_confirmation: "Testing"
-                   )
+        FactoryBot.create(:user,
+                          name: "Tom Spencer",
+                          email: "tom@spencer.com",
+                          password: "Testing",
+                          password_confirmation: "Testing"
+                         )
         post :create, params: { session: { email: "tom@spencer.com",
                                               password: "Testing",
                                               remember_me: '1' } }
@@ -55,11 +58,12 @@ RSpec.describe SessionsController, type: :controller do
 
     context 'login without remembering' do
       it "user login and logout succeed" do
-        user = User.create(name: "Tom Spencer",
-                    email: "tom@spencer.com",
-                    password: "Testing",
-                    password_confirmation: "Testing"
-                   )
+        FactoryBot.create(:user,
+                          name: "Tom Spencer",
+                          email: "tom@spencer.com",
+                          password: "Testing",
+                          password_confirmation: "Testing"
+                         )
         post :create, params: { session: { email: "tom@spencer.com",
                                               password: "Testing",
                                               remember_me: '0' } }
@@ -70,9 +74,10 @@ RSpec.describe SessionsController, type: :controller do
 
   describe "SessionHelper" do
     before do
-      @user = User.create(name: "Michael Spencer",
-                          email: "michael@example.com",
-                          password_digest: User.digest('password'))
+      @user = FactoryBot.create(:user,
+                                name: "Michael Spencer",
+                                email: "michael@example.com",
+                                password_digest: User.digest('password'))
       remember(@user)
     end
     context 'current_user' do
