@@ -16,6 +16,7 @@ gem 'turbolinks'
 gem 'jbuilder'
 gem 'strong_versions'
 gem 'bootsnap'
+gem 'aws-sdk', '~> 2'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.3.6'
