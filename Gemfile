@@ -17,6 +17,8 @@ gem 'jbuilder'
 gem 'strong_versions'
 gem 'bootsnap'
 gem 'aws-sdk', '~> 2'
+gem 'factory_bot_rails'
+
 
 group :development, :test do
   gem 'sqlite3', '~> 1.3.6'
@@ -27,7 +29,6 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'guard'
   gem 'guard-rspec'
-  gem 'factory_bot_rails'
 end
 
 group :development do
