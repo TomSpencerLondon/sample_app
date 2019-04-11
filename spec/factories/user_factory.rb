@@ -5,5 +5,9 @@ FactoryBot.define do
     email { "tom@spencer.co.uk" }
     activated { true }
     activated_at { Time.zone.now }
+
+    after :create do |user|
+      create :micropost, user: user
+    end
   end
 end

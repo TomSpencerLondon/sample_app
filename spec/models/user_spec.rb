@@ -146,5 +146,23 @@ RSpec.describe User, type: :model do
         expect(@user.authenticated?(:remember, '')).to be(false)
       end
     end
+
+    context 'when user is destroyed' do
+      before do
+        @user = FactoryBot.create(:user,
+                                  email: 'tom@testers.co.uk',
+                                  password: 'Testing',
+                                  password_confirmation: 'Testing')
+        FactoryBot.create(:micropost,
+                          content: 'Lorem Ipsum',
+                          created_at: Time.zone.now,
+                          user: @user)
+      end
+      it 'associated microposts are destroyed' do
+        expect(Micropost.all.count).to be(2)
+        @user.destroy
+        expect(Micropost.all.count).to eq(0)
+      end
+    end
   end
 end
