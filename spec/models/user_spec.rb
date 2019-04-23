@@ -76,6 +76,48 @@ RSpec.describe User, type: :model do
                         password: 'Testing'
                         )
     end
+
+    let(:user_three) do
+      FactoryBot.create(:user,
+                        name: 'Lana',
+                        email: 'lana@richardson.co.uk',
+                        password: 'Password')
+    end
+
+    let(:lana_post_one) do
+      FactoryBot.create(:micropost,
+                        content: "Hello this is a post by Lana",
+                        user: user_three)
+    end
+
+    let(:lana_post_two) do
+      FactoryBot.create(:micropost,
+                        content: "Hello this is a second post by Lana",
+                        user: user_three)
+    end
+
+    let(:archer_post) do
+      FactoryBot.create(:micropost,
+                        content: "This is my archer post not yours",
+                        user: user_two)
+    end
+
+    it 'feed should have the right posts' do
+      user.follow(user_three)
+      # Posts from followed user
+      user_three.microposts.each do |post_following|
+        expect(user.feed).to include(post_following)
+      end
+      # Posts from self
+      user.microposts.each do |post_self|
+        expect(user.feed).to include(post_self)
+      end
+      # Posts from unfollowed user
+      user_two.microposts.each do |post_unfollowed|
+        expect(user.feed).not_to include(post_unfollowed) 
+      end
+    end
+
     it 'should not follow unless selected' do
       expect(user.following?(user_two)).to eq(false)
     end
