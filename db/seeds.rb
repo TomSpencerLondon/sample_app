@@ -1,5 +1,5 @@
 User.destroy_all
-
+# Users
 FactoryBot.create(:user,
                   name: "Example User",
                   email: "example@railstutorial.org",
@@ -24,6 +24,7 @@ end
 
 users = User.order(:created_at).take(6)
 
+# Microposts
 50.times do
   content = Faker::Lorem.sentence(5)
   users.each do |user| 
@@ -31,4 +32,18 @@ users = User.order(:created_at).take(6)
                      content: content,
                      user: user)
   end
+end
+
+# Following relationships
+users = User.all
+user = User.first
+following = users[2..50]
+followers = users[3..40]
+
+following.each do |followed|
+  user.follow(followed)
+end
+
+followers.each do |follower|
+  follower.follow(user)
 end

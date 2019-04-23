@@ -40,40 +40,6 @@ RSpec.describe UsersController, type: :controller do
         expect(session.empty?).to be(true)
       end
     end
-
-    # context 'sign up with valid information' do
-    #   it "session is filled and user is added to database" do
-    #     user_count = User.count
-    #     new_count = user_count + 1
-    #     post :create, params: { user: {
-    #                                     name: "Tom Spencer",
-    #                                     email: "tom@homeflowing.co.uk",
-    #                                     password: "testing",
-    #                                     password_confirmation: "testing"
-    #                                   }
-    #                           }
-    #     expect(User.count).to eq(new_count)
-    #     expect(session.empty?).to be(false)
-    #     expect(session[:user_id].nil?).to be(false)
-    #   end
-    # end
-
-    # context 'sign up with valid information followed by signout' do
-    #   it "session is filled and user is added to database" do
-    #     user_count = User.count
-    #     new_count = user_count + 1
-    #     post :create, params: { user: {
-    #                                     name: "Tom Spencer",
-    #                                     email: "tom@homeflowing.co.uk",
-    #                                     password: "testing",
-    #                                     password_confirmation: "testing"
-    #                                   }
-    #                           }
-    #     expect(User.count).to eq(new_count)
-    #     expect(session.empty?).to be(false)
-    #     expect(session[:user_id].nil?).to be(false)
-    #   end
-    # end
   end
   describe "POST #edit" do
     context 'edit page when user is not logged in' do
@@ -159,6 +125,28 @@ RSpec.describe UsersController, type: :controller do
         expect(User.count).to eq(user_count)
         expect(response).to redirect_to(root_url)
       end
+    end
+  end
+
+  describe "GET #following" do
+    before do
+      @user = FactoryBot.create(:user, password: default_password, admin: false)
+    end
+
+    it 'redirects when user is not logged in' do
+      get :following, params: { id: @user }
+      expect(response).to redirect_to(login_url)
+    end
+  end
+
+  describe "GET #followers" do
+    before do
+      @user = FactoryBot.create(:user, password: default_password, admin: false)
+    end
+
+    it 'redirects when user is not logged in' do
+      get :followers, params: { id: @user }
+      expect(response).to redirect_to(login_url)
     end
   end
 end

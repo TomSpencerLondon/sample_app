@@ -3,6 +3,7 @@ FactoryBot.define do
 
     name { "Tom Spencer" }
     email { "tom@spencer.co.uk" }
+    password { "Testing123" }
     activated { true }
     activated_at { Time.zone.now }
 
